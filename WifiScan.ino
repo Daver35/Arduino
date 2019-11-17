@@ -1,25 +1,23 @@
 #include "ESP8266WiFi.h"
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
-  delay(2000);
+  Serial.begin(9600); // open the serial port 9600 b/s
+  WiFi.mode(WIFI_STA); // configure STA mode
+  WiFi.disconnect(); // disconnect WiFi shield from current network
+  delay(2000); // wait 2s
   Serial.println("Setup done");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   Serial.println("Scan start");
 
-  int n = WiFi.scanNetworks();
+  int n = WiFi.scanNetworks(); // detect number of networks available
   Serial.println("Scan done");
-  if(n==0)
+  if(n==0) // if no networks found, print message
     Serial.println("No networks found");
   else{
-    for(int i = 0; i<n; i++){
-      //print SSID
+    for(int i = 0; i<n; i++){ // for each network found
+      //print SSID, RSSI and encryption type of each network
       Serial.print(i+1);
       Serial.print(WiFi.SSID(i));
       Serial.print("(");
